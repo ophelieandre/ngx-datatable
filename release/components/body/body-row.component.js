@@ -169,6 +169,14 @@ var DataTableBodyRowComponent = /** @class */ (function () {
             rowElement: this._element
         });
     };
+    DataTableBodyRowComponent.prototype.onMouseleave = function (event) {
+        this.activate.emit({
+            type: 'mouseleave',
+            event: event,
+            row: this.row,
+            rowElement: this._element
+        });
+    };
     DataTableBodyRowComponent.prototype.recalculateColumns = function (val) {
         if (val === void 0) { val = this.columns; }
         this._columns = val;
@@ -250,6 +258,12 @@ var DataTableBodyRowComponent = /** @class */ (function () {
         __metadata("design:paramtypes", [Object]),
         __metadata("design:returntype", void 0)
     ], DataTableBodyRowComponent.prototype, "onMouseenter", null);
+    __decorate([
+        core_1.HostListener('mouseleave', ['$event']),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", [Object]),
+        __metadata("design:returntype", void 0)
+    ], DataTableBodyRowComponent.prototype, "onMouseleave", null);
     DataTableBodyRowComponent = __decorate([
         core_1.Component({
             selector: 'datatable-body-row',

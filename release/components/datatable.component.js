@@ -33,6 +33,7 @@ var header_1 = require("./header");
 var BehaviorSubject_1 = require("rxjs/BehaviorSubject");
 var DatatableComponent = /** @class */ (function () {
     function DatatableComponent(scrollbarHelper, dimensionsHelper, cd, element, differs) {
+        var _this = this;
         this.scrollbarHelper = scrollbarHelper;
         this.dimensionsHelper = dimensionsHelper;
         this.cd = cd;
@@ -132,7 +133,16 @@ var DatatableComponent = /** @class */ (function () {
          *
          * (`fn(x) === fn(y)` instead of `x === y`)
          */
-        this.rowIdentity = (function (x) { return x; });
+        this.rowIdentity = (function (x) {
+            if (_this._groupRowsBy) {
+                // each group in groupedRows are stored as {key, value: [rows]},
+                // where key is the groupRowsBy index
+                return x.key;
+            }
+            else {
+                return x;
+            }
+        });
         /**
          * A boolean you can use to set the detault behaviour of rows and groups
          * whether they will start expanded or not. If ommited the default is NOT expanded.

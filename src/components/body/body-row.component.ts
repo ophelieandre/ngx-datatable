@@ -213,6 +213,16 @@ export class DataTableBodyRowComponent implements DoCheck {
       });
   }
 
+  @HostListener('mouseleave', ['$event'])
+  onMouseleave(event: any): void {
+    this.activate.emit({
+      type: 'mouseleave',
+      event,
+      row: this.row,
+      rowElement: this._element
+    });
+  }
+
   recalculateColumns(val: any[] = this.columns): void {
     this._columns = val;
     const colsByPin = columnsByPin(this._columns);
